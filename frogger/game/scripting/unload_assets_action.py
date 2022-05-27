@@ -10,4 +10,4 @@ class UnloadAssetsAction(Action):
     def execute(self, cast, script, callback):
         self._audio_service.unload_sounds()
         self._video_service.unload_fonts()
-        # self._video_service.unload_images()
+        self._video_service.unload_images()

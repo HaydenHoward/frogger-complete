@@ -11,5 +11,5 @@ class LoadAssetsAction(Action):
     def execute(self, cast, script, callback):
         self._audio_service.load_sounds("frogger/assets/sounds")
         self._video_service.load_fonts("frogger/assets/fonts")
-        # self._video_service.load_images("frogger/assets/images")
+        self._video_service.load_images("frogger/assets/images")
         

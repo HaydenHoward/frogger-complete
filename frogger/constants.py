@@ -12,19 +12,30 @@ SCREEN_HEIGHT = 680
 CENTER_X = SCREEN_WIDTH / 2
 CENTER_Y = SCREEN_HEIGHT / 2
 
+# Field 
+FIELD_TOP = 60
+FIELD_BOTTOM = SCREEN_HEIGHT
+FIELD_LEFT = 0
+FIELD_RIGHT = SCREEN_WIDTH
+
 # Font
-FONT_FILE = "frogger/assets/fonts/HydrophiliaLiquid.otf"
+FONT_FILE = "frogger/assets/fonts/zorque.otf"
 FONT_SMALL = 32
-FONT_LARGE = 48
+FONT_LARGE = 60
 
 # Sound
+BOUNCE_SOUND = "frogger/assets/sounds/boing.wav"
+WELCOME_SOUND = "frogger/assets/sounds/start.wav"
+OVER_SOUND = "frogger/assets/sounds/over.wav"
+
 # Text
 ALIGN_CENTER = 0
 ALIGN_LEFT = 1
 ALIGN_RIGHT = 2
 
 # Colors
-BLACK = Color(0,0,0)
+BLACK = Color(0, 0, 0)
+GREY = Color (211, 211, 211)
 WHITE = Color(255, 255, 255)
 RED = Color(255, 0, 0)
 YELLOW = Color(255, 255, 0)
@@ -47,6 +58,12 @@ NEXT_LEVEL = 2
 IN_PLAY = 3
 GAME_OVER = 4
 
+# Levels 
+# LEVEL_FILE = "frogger/assets/data/level-001.txt"
+LEVEL_FILE = "frogger/assets/data/level-002.txt"
+
+BASE_LEVELS = 5
+
 # Scripting Constants
 
 # Phases
@@ -60,9 +77,35 @@ RELEASE = 6
 
 # Casting Constants
 
+# Stats
+STATS_GROUP = "stats"
+DEFAULT_LIVES = 3
+MAXIMUM_LIVES = 5
 # Frog
 FROG_GROUP = "frog"
-FROG_WIDTH = 50
-FROG_HEIGHT = 50
-FROG_VELOCITY = 3
-FROG_IMAGE = "8"
+FROG_WIDTH = 100
+FROG_HEIGHT = 100
+FROG_VELOCITY = 5
+FROG_RATE = 6
+FROG_IMAGES = [f"frogger/assets/images/{n:03}.png" for n in range(1, 4)]
+
+# Tile
+TILE_GROUP = "tile"
+TILE_IMAGE = {
+    # "b": [f"frogger/assets.images/{i:03}.png" for i in range(4, 6)],
+    # "g": [f"frogger/assets.images/{i:03}.png" for i in range(6, 8)]
+    "b" : ["frogger/assets/images/004.png"],
+    "g" : ["frogger/assets/images/006.png"]
+    }
+TILE_HEIGHT = 40
+TILE_WIDTH = 80
+TILE_RATE = 4
+TILE_DELAY = 0.5
+
+# Dialog
+DIALOG_GROUP = "dialogs"
+ENTER_TO_START = "PRESS ENTER TO START"
+PREP_TO_LAUNCH = "PREPARING TO LAUNCH"
+WAS_GOOD_GAME = "GAME OVER"
+
+
