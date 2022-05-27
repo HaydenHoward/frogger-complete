@@ -136,7 +136,7 @@ class SceneManager:
     def _add_frog(self, cast):
         cast.clear_actors(FROG_GROUP)
         x = CENTER_X - FROG_WIDTH / 2
-        y = SCREEN_HEIGHT - FROG_HEIGHT
+        y = SCREEN_HEIGHT - (FROG_HEIGHT * 2)
         position = Point(x, y)
         size = Point(FROG_WIDTH, FROG_HEIGHT)
         velocity = Point(0, 0)
@@ -147,6 +147,7 @@ class SceneManager:
 
     def _add_tiles(self, cast):
         cast.clear_actors(TILE_GROUP)
+        cast.clear_actors(SAFE_TILE_GROUP)
 
         stats = cast.get_first_actor(STATS_GROUP)
         level = stats.get_level() % BASE_LEVELS
@@ -172,7 +173,10 @@ class SceneManager:
                     animation = Animation(images, TILE_RATE, TILE_DELAY)
 
                     tile = Tiles(body, animation)
-                    cast.add_actor(TILE_GROUP, tile)
+                    if color == "g":
+                        cast.add_actor(TILE_GROUP, tile)
+                    elif color == "b":
+                        cast.add_actor(SAFE_TILE_GROUP, tile)
     
     def _add_dialog(self, cast, message):
         cast.clear_actors(DIALOG_GROUP)
@@ -220,7 +224,7 @@ class SceneManager:
         script.clear_actions(UPDATE)
         script.add_action(UPDATE, self.MOVE_FROG_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
-        script.add_action(UPDATE, self.COLLIDE_FROG_ACTION)
+        # script.add_action(UPDATE, self.COLLIDE_FROG_ACTION)
         script.add_action(UPDATE, self.COLLIDE_TILE_ACTION)
         script.add_action(UPDATE, self.MOVE_FROG_ACTION)
         script.add_action(UPDATE, self.CHECK_OVER_ACTION)

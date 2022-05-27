@@ -81,16 +81,25 @@ RELEASE = 6
 STATS_GROUP = "stats"
 DEFAULT_LIVES = 3
 MAXIMUM_LIVES = 5
+
+# Hud
+HUD_MARGIN = 15
+LEVEL_GROUP = "level"
+LIVES_GROUP = "lives"
+LEVEL_FORMAT = "LEVEL: {}"
+LIVES_FORMAT = "LIVES: {}"
+
 # Frog
 FROG_GROUP = "frog"
-FROG_WIDTH = 100
-FROG_HEIGHT = 100
+FROG_WIDTH = 40
+FROG_HEIGHT = 40
 FROG_VELOCITY = 5
 FROG_RATE = 6
 FROG_IMAGES = [f"frogger/assets/images/{n:03}.png" for n in range(1, 4)]
 
 # Tile
 TILE_GROUP = "tile"
+SAFE_TILE_GROUP ="safe_tile"
 TILE_IMAGE = {
     # "b": [f"frogger/assets.images/{i:03}.png" for i in range(4, 6)],
     # "g": [f"frogger/assets.images/{i:03}.png" for i in range(6, 8)]
