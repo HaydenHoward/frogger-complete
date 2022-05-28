@@ -59,8 +59,8 @@ IN_PLAY = 3
 GAME_OVER = 4
 
 # Levels 
-# LEVEL_FILE = "frogger/assets/data/level-001.txt"
-LEVEL_FILE = "frogger/assets/data/level-002.txt"
+LEVEL_FILE = "frogger/assets/data/level-001.txt"
+# LEVEL_FILE = "frogger/assets/data/level-002.txt"
 
 BASE_LEVELS = 5
 
@@ -93,7 +93,7 @@ LIVES_FORMAT = "LIVES: {}"
 FROG_GROUP = "frog"
 FROG_WIDTH = 40
 FROG_HEIGHT = 40
-FROG_VELOCITY = 5
+FROG_VELOCITY = 3
 FROG_RATE = 6
 FROG_IMAGES = [f"frogger/assets/images/{n:03}.png" for n in range(1, 4)]
 
@@ -107,14 +107,21 @@ TILE_IMAGE = {
     "g" : ["frogger/assets/images/006.png"]
     }
 TILE_HEIGHT = 40
-TILE_WIDTH = 80
+TILE_WIDTH = 72
 TILE_RATE = 4
 TILE_DELAY = 0.5
+
+# Item
+ITEM_GROUP = "item"
+ITEM_HEIGHT = 30
+ITEM_WIDTH = 30
+ITEM_IMAGE = "frogger/assets/images/012.png"
+ITEM_POINTS = 1
 
 # Dialog
 DIALOG_GROUP = "dialogs"
 ENTER_TO_START = "PRESS ENTER TO START"
-PREP_TO_LAUNCH = "PREPARING TO LAUNCH"
+TRY_MORE = "TRY AGIAN"
 WAS_GOOD_GAME = "GAME OVER"
 
 

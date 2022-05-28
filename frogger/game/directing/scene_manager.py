@@ -4,6 +4,7 @@ from constants import *
 from game.casting.animation import Animation
 from game.casting.body import Body
 from game.casting.image import Image
+from game.casting.item import Item
 from game.casting.text import Text 
 from game.casting.point import Point
 from game.casting.frog import Frog
@@ -17,9 +18,11 @@ from game.scripting.check_over_action import CheckOverAction
 from game.scripting.control_frog_action import ControlFrogAction
 from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_frog_action import CollideFrogAction
+from game.scripting.collide_item_action import CollideItemAction
 from game.scripting.collide_tiles_action import CollideTileAction
 from game.scripting.draw_frog_action import DrawFrogAction
 from game.scripting.draw_dialog_action import DrawDialogAction
+from game.scripting.draw_item_action import DrawItemAction
 from game.scripting.draw_tiles_action import DrawTilesAction
 from game.scripting.end_drawing_action import EndDrawingAction
 from game.scripting.load_assets_action import LoadAssetsAction
@@ -47,9 +50,11 @@ class SceneManager:
     CONTROL_FROG_ACTION = ControlFrogAction(KEYBOARD_SERVICE)
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_FROG_ACTION = CollideFrogAction(PHYSICS_SERVICE, AUDIO_SERVICE)
+    COLLIDE_ITEM_ACTION = CollideItemAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_TILE_ACTION = CollideTileAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     DRAW_FROG_ACTION = DrawFrogAction(VIDEO_SERVICE)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO_SERVICE)
+    DRAW_ITEM_ACTION = DrawItemAction(VIDEO_SERVICE)
     DRAW_TILE_ACTION = DrawTilesAction(VIDEO_SERVICE)
     INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
@@ -83,6 +88,7 @@ class SceneManager:
     def _prepare_new_game(self, cast, script):
         self._add_stats(cast)
         self._add_tiles(cast)
+        self._add_item(cast)
         self._add_frog(cast)
         self._add_dialog(cast, ENTER_TO_START)
         
@@ -97,7 +103,9 @@ class SceneManager:
 
     def _prepare_next_level(self, cast, script):
         self._add_tiles(cast)
+        self._add_item(cast)
         self._add_frog(cast)
+
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
@@ -108,6 +116,8 @@ class SceneManager:
     
     def _prepare_try_again(self, cast, script):
         self._add_frog(cast)
+        self._add_item(cast)
+        self._add_dialog(cast, TRY_MORE)
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
@@ -178,9 +188,22 @@ class SceneManager:
                     elif color == "b":
                         cast.add_actor(SAFE_TILE_GROUP, tile)
     
+    def _add_item(self, cast):
+        cast.clear_actors(ITEM_GROUP)
+        x = CENTER_X - ITEM_WIDTH / 2
+        y = CENTER_Y - 230
+        position = Point(x, y)
+        size = Point(ITEM_WIDTH, ITEM_HEIGHT)
+        velocity = Point(0, 0)
+        points = ITEM_POINTS
+        body = Body(position, size, velocity)
+        image = Image(ITEM_IMAGE)
+        item = Item(body, image, points, True)
+        cast.add_actor(ITEM_GROUP, item)
+    
     def _add_dialog(self, cast, message):
         cast.clear_actors(DIALOG_GROUP)
-        text = Text(message, FONT_FILE, FONT_LARGE, ALIGN_CENTER)
+        text = Text(message, FONT_FILE, FONT_SMALL, ALIGN_CENTER)
         position = Point(CENTER_X, CENTER_Y)
         # position = Point(50, 300)
         label = Label(text, position)
@@ -208,7 +231,9 @@ class SceneManager:
         script.clear_actions(OUTPUT)
         script.add_action(OUTPUT, self.START_DRAWING_ACTION)
         script.add_action(OUTPUT, self.DRAW_TILE_ACTION)
+        script.add_action(OUTPUT, self.DRAW_ITEM_ACTION)
         script.add_action(OUTPUT, self.DRAW_FROG_ACTION)
+        script.add_action(OUTPUT, self.DRAW_DIALOG_ACTION)
         script.add_action(OUTPUT, self.END_DRAWING_ACTION)
         
    
@@ -224,6 +249,7 @@ class SceneManager:
         script.clear_actions(UPDATE)
         script.add_action(UPDATE, self.MOVE_FROG_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
+        script.add_action(UPDATE, self.COLLIDE_ITEM_ACTION)
         # script.add_action(UPDATE, self.COLLIDE_FROG_ACTION)
         script.add_action(UPDATE, self.COLLIDE_TILE_ACTION)
         script.add_action(UPDATE, self.MOVE_FROG_ACTION)
