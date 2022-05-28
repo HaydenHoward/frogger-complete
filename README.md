@@ -20,6 +20,11 @@ The project files and folders are organized as follows:
 ```
 root                    (project root folder)
 +-- frogger              (source code for game)
+  +-- assets            (resources for the program)
+    +-- data            (Levels for the game)
+    +-- fonts           (fonts for text)
+    +-- images          (images)
+    +-- sounds          (sound effects)
   +-- game              (specific game classes)
     +-- casting         (various actor classes)
     +-- directing       (director and scene manager classes)
