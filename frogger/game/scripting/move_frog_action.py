@@ -1,5 +1,3 @@
-from turtle import pos
-from torch import poisson
 from constants import *
 from game.casting.point import Point
 from game.scripting.action import Action

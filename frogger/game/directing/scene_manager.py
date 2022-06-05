@@ -1,5 +1,4 @@
 import csv
-from turtle import position
 from constants import *
 from game.casting.animation import Animation
 from game.casting.body import Body
